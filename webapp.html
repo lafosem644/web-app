@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ink & Ideas | Blog</title>
+  <style>
+    :root {
+      --bg: #f8f5ef;
+      --text: #222222;
+      --muted: #6f6a61;
+      --card: #ffffff;
+      --accent: #d97745;
+      --accent-dark: #a94f28;
+      --border: #e8dfd2;
+      --shadow: 0 18px 45px rgba(45, 32, 18, 0.09);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(248, 245, 239, 0.86);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 18px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .logo {
+      font-weight: 900;
+      font-size: 1.35rem;
+      letter-spacing: -0.04em;
+    }
+
+    .logo span {
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent-dark);
+    }
+
+    .subscribe-btn {
+      background: var(--text);
+      color: #fff;
+      padding: 10px 16px;
+      border-radius: 999px;
+      font-weight: 700;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .subscribe-btn:hover {
+      transform: translateY(-2px);
+      background: var(--accent-dark);
+      color: #fff !important;
+    }
+
+    .hero {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 72px 24px 46px;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 42px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      color: var(--accent-dark);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-size: 0.78rem;
+      margin-bottom: 14px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.6rem, 7vw, 5.8rem);
+      line-height: 0.95;
+      letter-spacing: -0.075em;
+      margin-bottom: 22px;
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 1.15rem;
+      max-width: 610px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--text);
+      padding: 13px 20px;
+      border-radius: 999px;
+      font-weight: 800;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn.primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+      box-shadow: 0 12px 24px rgba(217, 119, 69, 0.28);
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+    }
+
+    .hero-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 34px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transform: rotate(1deg);
+    }
+
+    .hero-image {
+      min-height: 330px;
+      background:
+        linear-gradient(135deg, rgba(217, 119, 69, 0.12), rgba(34, 34, 34, 0.06)),
+        url("https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=1200&q=80") center/cover;
+    }
+
+    .hero-card-content {
+      padding: 24px;
+    }
+
+    .tag {
+      display: inline-block;
+      background: #fff1e8;
+      color: var(--accent-dark);
+      padding: 7px 11px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .section {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 34px 24px;
+    }
+
+    .section-title {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: end;
+      margin-bottom: 24px;
+    }
+
+    .section-title h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      letter-spacing: -0.055em;
+      line-height: 1;
+    }
+
+    .section-title p {
+      color: var(--muted);
+      max-width: 420px;
+    }
+
+    .filters {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 26px;
+    }
+
+    .filter-btn {
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--muted);
+      padding: 9px 14px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: 750;
+    }
+
+    .filter-btn.active,
+    .filter-btn:hover {
+      background: var(--text);
+      color: #fff;
+      border-color: var(--text);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .post-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 12px 26px rgba(45, 32, 18, 0.06);
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+    }
+
+    .post-card:hover {
+      transform: translateY(-7px);
+      box-shadow: var(--shadow);
+    }
+
+    .post-img {
+      height: 210px;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .post-content {
+      padding: 22px;
+    }
+
+    .meta {
+      color: var(--muted);
+      font-size: 0.86rem;
+      font-weight: 650;
+      margin-bottom: 10px;
+    }
+
+    .post-card h3 {
+      font-size: 1.28rem;
+      line-height: 1.2;
+      margin-bottom: 10px;
+      letter-spacing: -0.03em;
+    }
+
+    .post-card p {
+      color: var(--muted);
+      font-size: 0.98rem;
+      margin-bottom: 18px;
+    }
+
+    .read-more {
+      font-weight: 850;
+      color: var(--accent-dark);
+    }
+
+    .newsletter {
+      margin: 48px auto;
+      max-width: 1130px;
+      border-radius: 36px;
+      background: #222;
+      color: #fff;
+      padding: 42px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .newsletter h2 {
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      line-height: 1;
+      letter-spacing: -0.06em;
+    }
+
+    .newsletter p {
+      color: #d7d2ca;
+      margin-top: 12px;
+    }
+
+    .newsletter form {
+      display: flex;
+      gap: 10px;
+      background: #fff;
+      border-radius: 999px;
+      padding: 7px;
+    }
+
+    .newsletter input {
+      flex: 1;
+      border: none;
+      padding: 0 14px;
+      font: inherit;
+      outline: none;
+      min-width: 0;
+    }
+
+    .newsletter button {
+      border: none;
+      background: var(--accent);
+      color: #fff;
+      border-radius: 999px;
+      padding: 12px 18px;
+      font-weight: 850;
+      cursor: pointer;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 24px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    @media (max-width: 900px) {
+      .hero,
+      .newsletter {
+        grid-template-columns: 1fr;
+      }
+
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .section-title {
+        align-items: start;
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .nav {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .nav-links {
+        width: 100%;
+        overflow-x: auto;
+        padding-bottom: 4px;
+      }
+
+      .hero {
+        padding-top: 44px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .newsletter {
+        padding: 28px;
+      }
+
+      .newsletter form {
+        border-radius: 22px;
+        flex-direction: column;
+      }
+
+      .newsletter input {
+        padding: 12px 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="nav">
+      <a href="#" class="logo">Ink<span>&</span>Ideas</a>
+      <div class="nav-links">
+        <a href="#posts">Posts</a>
+        <a href="#topics">Topics</a>
+        <a href="#newsletter">Newsletter</a>
+        <a class="subscribe-btn" href="#newsletter">Subscribe</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div>
+        <div class="eyebrow">Modern stories for curious minds</div>
+        <h1>Read better ideas, one post at a time.</h1>
+        <p>A clean, responsive blog template for essays, tutorials, interviews, travel notes, or your personal publication.</p>
+        <div class="hero-actions">
+          <a class="btn primary" href="#posts">Explore Posts</a>
+          <a class="btn" href="#newsletter">Join Newsletter</a>
+        </div>
+      </div>
+
+      <article class="hero-card">
+        <div class="hero-image"></div>
+        <div class="hero-card-content">
+          <span class="tag">Featured</span>
+          <h2>How to build a creative habit that actually lasts</h2>
+          <p class="meta">By Maya Stone · 8 min read</p>
+        </div>
+      </article>
+    </section>
+
+    <section id="posts" class="section">
+      <div class="section-title">
+        <h2>Latest Articles</h2>
+        <p>Browse fresh posts across design, productivity, culture, and mindful technology.</p>
+      </div>
+
+      <div id="topics" class="filters">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="Design">Design</button>
+        <button class="filter-btn" data-filter="Productivity">Productivity</button>
+        <button class="filter-btn" data-filter="Culture">Culture</button>
+        <button class="filter-btn" data-filter="Tech">Tech</button>
+      </div>
+
+      <div class="grid" id="postGrid">
+        <article class="post-card" data-category="Design">
+          <div class="post-img" style="background-image:url('https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=900&q=80')"></div>
+          <div class="post-content">
+            <div class="meta">Design · Apr 12</div>
+            <h3>Designing spaces that make your ideas feel bigger</h3>
+            <p>Simple visual systems can make your writing, projects, and brand feel instantly more polished.</p>
+            <a href="#" class="read-more">Read article →</a>
+          </div>
+        </article>
+
+        <article class="post-card" data-category="Productivity">
+          <div class="post-img" style="background-image:url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80')"></div>
+          <div class="post-content">
+            <div class="meta">Productivity · Apr 18</div>
+            <h3>The quiet power of doing fewer things well</h3>
+            <p>A practical guide to reducing noise, choosing priorities, and finishing what matters.</p>
+            <a href="#" class="read-more">Read article →</a>
+          </div>
+        </article>
+
+        <article class="post-card" data-category="Culture">
+          <div class="post-img" style="background-image:url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=900&q=80')"></div>
+          <div class="post-content">
+            <div class="meta">Culture · Apr 25</div>
+            <h3>Why small communities still shape the internet</h3>
+            <p>Beyond big platforms, focused communities remain the best places to learn and belong.</p>
+            <a href="#" class="read-more">Read article →</a>
+          </div>
+        </article>
+
+        <article class="post-card" data-category="Tech">
+          <div class="post-img" style="background-image:url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=900&q=80')"></div>
+          <div class="post-content">
+            <div class="meta">Tech · May 02</div>
+            <h3>Making technology feel calmer and more humane</h3>
+            <p>Thoughtful defaults and gentle interfaces can help products respect attention.</p>
+            <a href="#" class="read-more">Read article →</a>
+          </div>
+        </article>
+
+        <article class="post-card" data-category="Design">
+          <div class="post-img" style="background-image:url('https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=900&q=80')"></div>
+          <div class="post-content">
+            <div class="meta">Design · May 06</div>
+            <h3>A beginner-friendly approach to visual storytelling</h3>
+            <p>Use contrast, rhythm, and hierarchy to turn everyday ideas into compelling narratives.</p>
+            <a href="#" class="read-more">Read article →</a>
+          </div>
+        </article>
+
+        <article class="post-card" data-category="Productivity">
+          <div class="post-img" style="background-image:url('https://images.unsplash.com/photo-1483058712412-4245e9b90334?auto=format&fit=crop&w=900&q=80')"></div>
+          <div class="post-content">
+            <div class="meta">Productivity · May 10</div>
+            <h3>Building a weekly review you will actually keep</h3>
+            <p>A lightweight ritual for reflecting, planning, and staying honest with your goals.</p>
+            <a href="#" class="read-more">Read article →</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="newsletter" class="newsletter">
+      <div>
+        <h2>Get thoughtful posts in your inbox.</h2>
+        <p>One email each week. No spam, no noise, just useful ideas and links worth saving.</p>
+      </div>
+      <form onsubmit="event.preventDefault(); alert('Thanks for subscribing!');">
+        <input type="email" placeholder="Enter your email" required />
+        <button type="submit">Subscribe</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2026 Ink & Ideas. Built with HTML, CSS, and a little JavaScript.</p>
+  </footer>
+
+  <script>
+    const buttons = document.querySelectorAll('.filter-btn');
+    const posts = document.querySelectorAll('.post-card');
+
+    buttons.forEach(button => {
+      button.addEventListener('click', () => {
+        buttons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+
+        const filter = button.dataset.filter;
+
+        posts.forEach(post => {
+          const shouldShow = filter === 'all' || post.dataset.category === filter;
+          post.style.display = shouldShow ? 'block' : 'none';
+        });
+      });
+    });
+  </script>
+</body>
+</html>
